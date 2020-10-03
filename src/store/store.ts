@@ -1,25 +1,70 @@
+import { DayTasks } from '@/models/DayTasks';
 import { State, Getter, Action, Mutation } from 'vuex-simple';
 
 export class MyStore {
     @State()
-    public theDay: number = new Date().getDate();
+    public theDay: Date = new Date();
 
-    // @State()
-    // public taskList = [];
+    constructor(d: Date = new Date()) {
+        d.setHours(0, 0, 0, 0);
+        this.theDay = d;
+    }
+
+    @State()
+    public taskList = Array<DayTasks>();
 
     @Mutation()
-    public setCurDay(day: number) {
-        this.theDay = day;
+    public setTheDay(date: Date) {
+        this.theDay = date;
     }
 
     @Action()
-    public async actionChangeCurDay(day: number) {
+    public async actionChangeCurDay(date: Date) {
         await new Promise(r => setTimeout(r, 100));
-        this.setCurDay(day);
+        this.setTheDay(date);
     }
+
+    @Mutation()
+    public setDayTasks(dayTasks: DayTasks) {
+        var dt = this.taskList.find(x => x.date.toDateString() === dayTasks.date.toDateString());
+
+        if (dt) {
+            var idt = this.taskList.indexOf(dt);
+            this.taskList.splice(idt, 1);
+        }
+        this.taskList.push(dayTasks);
+    }
+
+    @Action()
+    public async actionAddTask(task: string) {
+        await new Promise(r => setTimeout(r, 100));
+        var dt = this.taskList.find(x => x.date.toDateString() === this.theDay.toDateString());
+        var tasks = Array<string>();
+        if (dt) {
+            tasks = Object.assign([], dt.tasks);
+
+        }
+        tasks.push(task);
+        var new_dt = new DayTasks();
+        new_dt.date = this.theDay;
+        new_dt.tasks = tasks;
+
+        this.setDayTasks(new_dt);
+    }
+
 
     @Getter()
     public get aCurrentDay() {
         return this.theDay;
+    }
+
+    @Getter()
+    public get dayTasks(): DayTasks {
+        var dt = new DayTasks();
+        dt.date = this.theDay;
+        dt.tasks = Array<string>();
+        var t = this.taskList.find(x => x.date.toDateString() === this.theDay.toDateString());
+        if (t) dt = t;
+        return dt;
     }
 }

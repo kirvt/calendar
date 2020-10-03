@@ -1,14 +1,19 @@
-h3 {
-    margin: 40px 0 0;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-  a {
-    color: #42b983;
-  }
+.days{
+  display: grid;
+  grid-template-columns: repeat(7, 20px [col-start]);
+  grid-template-rows: auto;
+}
+
+.active{
+  background-color: #8AD8FB;
+  border: 1px solid #8AD8FB;
+  border-radius: 10px;
+}
+
+div.days{
+  cursor: pointer;
+}
+
+.busy{
+  color:red;
+}

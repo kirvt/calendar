@@ -5,11 +5,10 @@ import { useStore } from 'vuex-simple';
 import { MyStore } from '@/store/store';
 
 import styles from './Calendar.css?module'
-import { DayTasks } from '@/models/DayTasks';
 
 interface Props {
     curDay: Date,
-    taskList: Array<DayTasks>;
+    hasTasks: boolean
 }
 
 @Component
@@ -18,7 +17,7 @@ export default class Calendar extends VueComponent<Props> {
     curDay!: Date;
 
     @Prop()
-    taskList!: Array<DayTasks>;
+    hasTasks!: boolean;
 
     public store: MyStore = useStore(this.$store);
     dayNames: Array<string> = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
@@ -43,16 +42,21 @@ export default class Calendar extends VueComponent<Props> {
 
         for (var d = 1; d <= lastDay; d++) {
             var day = new Date(year, mnth, d)
-            month.push(<div class={[this.isCurrent(day) ? styles.active : '', this.hasTasks(day) ? styles.busy : '']} onclick={this.setCurDay.bind(this, day)}>{day.getDate()}</div>);
+            month.push(<div class={this.dayClass(day)} onclick={this.setCurDay.bind(this, day)}>{day.getDate()}</div>);
         }
 
         return month;
     }
 
-    hasTasks(date:Date):boolean{
-        var dt = this.taskList.find(x => x.date.toDateString() === date.toDateString());
-        if(dt && dt.tasks.length > 0) return true;
-        return false;
+    dayClass(date: Date): string {
+        var classes = [];
+        var classtring = '';
+        if (this.isCurrent(date)) classes.push('active');
+        if (this.hasTasks) classes.push('styles.busy');
+        if (classes.length > 0) {
+            classes.forEach(c => classtring += c + ",")
+        }
+        return classtring.slice(0, -1);
     }
 
     setCurDay(date: Date) {
