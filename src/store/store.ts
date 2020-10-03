@@ -8,6 +8,10 @@ export class MyStore {
     constructor(d: Date = new Date()) {
         d.setHours(0, 0, 0, 0);
         this.theDay = d;
+        var dt = new DayTasks();
+        dt.date = this.theDay;
+        dt.tasks = ['Выполнить задание'];
+        this.taskList = [dt];
     }
 
     @State()

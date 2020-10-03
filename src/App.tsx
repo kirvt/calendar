@@ -12,6 +12,8 @@ import { DayTasks } from './models/DayTasks';
 export default class App extends Vue {
   public store: MyStore = useStore(this.$store);
 
+  windowHeight: number = window.innerHeight;
+
   get curDayTasks(): DayTasks {
     return this.store.dayTasks
   }
@@ -20,11 +22,23 @@ export default class App extends Vue {
     return this.curDayTasks.tasks.length > 0
   }
 
+  get wHeight(): string {
+    return "height:" + this.windowHeight + "px";
+  }
+
+  mounted() {
+    window.addEventListener("resize", () => {
+      this.windowHeight = window.innerHeight;
+    })
+  }
+
   render() {
     return (
-      <div id="app">
-        <Calendar curDay={this.store.theDay} taskList={this.store.taskList} />
-        <TaskList dayTasks={this.curDayTasks} />
+      <div id="app" style={this.wHeight}>
+        <div id="container">
+          <Calendar curDay={this.store.theDay} taskList={this.store.taskList} />
+          <TaskList dayTasks={this.curDayTasks} />
+        </div>
       </div>
     )
   }

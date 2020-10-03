@@ -6,7 +6,7 @@ import { MyStore } from '@/store/store';
 
 import { DayTasks } from '@/models/DayTasks';
 
-//import styles from './TaskList.css?module'
+import styles from './TaskList.css?module'
 
 interface Props {
     dayTasks: DayTasks,
@@ -36,12 +36,15 @@ export default class TaskList extends VueComponent<Props> {
 
     render() {
         return (
-            <div>
-                <h2>События</h2>
-                <ul>
-                    {this.dayTasks.tasks.map(task => <li>{task}</li>)}
-                </ul>
-                <input type="text" placeholder="Текст" onkeypress={this.addTask.bind(this)} />
+            <div class={[styles.tasklist, 'box']}>
+                <div class={styles.header}>События</div>
+                <div class={styles.tasks}>
+                    <ul>
+                       {this.dayTasks.tasks.map(task => <li> <input type="checkbox"/>{task}</li>)}
+                    </ul>
+
+                    <input type="text" placeholder="Текст" onkeypress={this.addTask.bind(this)} />
+                </div>
             </div>
         )
     }

@@ -1,5 +1,26 @@
-#app {
+#container {
   display: grid;
-  grid-template-columns: repeat(2, 200px [col-start]);
-  grid-template-rows: auto;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 20px;
+  grid-template-areas: "calendar tasklist";
+  background-color: white;
+  padding:40px;
+  font-size: small;
+  font-weight: 600;
+  color:#747474
+  }
+
+  #app{
+    display: grid;
+    background-color: #dfdfdf88;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    justify-content: center;
+    align-content: center;
+  }
+
+  .box{
+    padding: 20px;
+    box-shadow: 0 0 10px #a8a8a8;
+    border-radius: 5px;
   }

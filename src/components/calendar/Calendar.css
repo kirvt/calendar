@@ -1,13 +1,46 @@
-.days{
+.calendar {
   display: grid;
-  grid-template-columns: repeat(7, 20px [col-start]);
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
+  gap: 15px 0px;
+  grid-template-areas:
+    "month"
+    "week"
+    "days";
+  grid-area: calendar;
 }
 
-.active{
-  background-color: #8AD8FB;
+.month { grid-area: month; }
+
+.week { 
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: auto;
+  gap: 10px 10px;
+  grid-area: week;
+color: #a5a5a5;
+text-align: center;
+}
+
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: auto;
+  gap: 5px 5px;
+  grid-area: days;
+  text-align: center;
+}
+
+.days div{
+  border: 1px solid white;
+  padding:5px;
+}
+
+.days div.active{
+  background-color:  #8AD8FB;
   border: 1px solid #8AD8FB;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 div.days{
@@ -15,5 +48,5 @@ div.days{
 }
 
 .busy{
-  color:red;
+  color:#AA3434;
 }

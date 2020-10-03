@@ -28,6 +28,12 @@ export default class Calendar extends VueComponent<Props> {
         return monthName.charAt(0).toUpperCase() + monthName.slice(1) + ' ' + this.curDay.getFullYear();
     }
 
+    get week(): Array<JSX.Element> {
+        var theWeek = Array<JSX.Element>();
+        this.dayNames.forEach(dn => { theWeek.push(<span>{dn}</span>) });
+        return theWeek;
+    }
+
     get allDays(): Array<JSX.Element> {
         var month = [];
 
@@ -49,9 +55,9 @@ export default class Calendar extends VueComponent<Props> {
         return month;
     }
 
-    hasTasks(date:Date):boolean{
+    hasTasks(date: Date): boolean {
         var dt = this.taskList.find(x => x.date.toDateString() === date.toDateString());
-        if(dt && dt.tasks.length > 0) return true;
+        if (dt && dt.tasks.length > 0) return true;
         return false;
     }
 
@@ -67,8 +73,9 @@ export default class Calendar extends VueComponent<Props> {
 
     render() {
         return (
-            <div>
-                <h2>{this.curDate}</h2>
+            <div class={[styles.calendar, 'box']}>
+                <div class={styles.month}>{this.curDate}</div>
+                <div class={styles.week}>{this.week}</div>
                 <div class={styles.days}>
                     {this.allDays}
                 </div>
