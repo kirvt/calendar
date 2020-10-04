@@ -23,8 +23,7 @@ export class MyStore {
     }
 
     @Action()
-    public async actionChangeCurDay(date: Date) {
-        await new Promise(r => setTimeout(r, 100));
+    public actionChangeCurDay(date: Date) {
         this.setTheDay(date);
     }
 
@@ -40,8 +39,7 @@ export class MyStore {
     }
 
     @Action()
-    public async actionAddTask(task: string) {
-        await new Promise(r => setTimeout(r, 100));
+    public actionAddTask(task: string) {
         var dt = this.taskList.find(x => x.date.toDateString() === this.theDay.toDateString());
         var tasks = Array<string>();
         if (dt) {
