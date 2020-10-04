@@ -4,32 +4,42 @@
     grid-template-rows: min-content;
     gap: 15px 0px;
     grid-template-areas:
-      "header"
-      "tasks"
-      "newtask";
+        "header"
+        "tasks";
     grid-area: tasklist;
 
-  }
+}
 
-  .header { grid-area: header; }
+.header {
+    grid-area: header;
 
-  .tasks { grid-area: tasks; }
+}
 
-.tasks ul{
+.tasks {
+    grid-area: tasks;
+    color: #b3b3b3;
+}
+
+.tasks ul {
     padding: 0;
     margin: 0;
 }
-  .tasks ul>li{
-      list-style: none;
+
+.tasks ul>li {
+    list-style: none;
 }
 
-.tasks input[type="text"]{
-    margin-left:25px;
+.tasks input[type="text"] {
+    margin-left: 25px;
     margin-top: 10px;
+    color: #b3b3b3;
+    box-shadow: #b3b3b3;
 }
 
-.tasks input[type="checkbox"]{
-    margin-right:10px;
+.tasks input[type="text"]::placeholder {
+    color: #b3b3b3;
 }
 
-  .newtask { grid-area: newtask; }
+.tasks input[type="checkbox"] {
+    margin-right: 10px;
+}

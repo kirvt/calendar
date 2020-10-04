@@ -49,7 +49,7 @@ export default class Calendar extends VueComponent<Props> {
 
         for (var d = 1; d <= lastDay; d++) {
             var day = new Date(year, mnth, d)
-            month.push(<div class={[this.isCurrent(day) ? styles.active : '', this.hasTasks(day) ? styles.busy : '']} onclick={this.setCurDay.bind(this, day)}>{day.getDate()}</div>);
+            month.push(<div class={this.isCurrent(day) ? styles.active : this.hasTasks(day) ? styles.busy : ''} onclick={this.setCurDay.bind(this, day)}>{day.getDate()}</div>);
         }
 
         return month;

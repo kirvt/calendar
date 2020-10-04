@@ -10,16 +10,18 @@
   grid-area: calendar;
 }
 
-.month { grid-area: month; }
+.month {
+  grid-area: month;
+}
 
-.week { 
+.week {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: auto;
   gap: 10px 10px;
   grid-area: week;
-color: #a5a5a5;
-text-align: center;
+  color: #b3b3b3;
+  text-align: center;
 }
 
 
@@ -32,21 +34,22 @@ text-align: center;
   text-align: center;
 }
 
-.days div{
+.days div {
   border: 1px solid white;
-  padding:5px;
+  padding: 5px;
 }
 
-.days div.active{
-  background-color:  #8AD8FB;
+.days div.active {
+  background-color: #8AD8FB;
   border: 1px solid #8AD8FB;
   border-radius: 15px;
+  color: white;
 }
 
-div.days{
+div.days {
   cursor: pointer;
 }
 
-.busy{
-  color:#AA3434;
+.busy {
+  color: #AA3434;
 }
